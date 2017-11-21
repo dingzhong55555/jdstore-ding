@@ -1,4 +1,6 @@
 class Admin::ProductsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :admin_required
 
   def index
     @products = Product.all
@@ -29,6 +31,13 @@ class Admin::ProductsController < ApplicationController
      redirect_to admin_products_path
    else
      render :edit
+   end
+ end
+
+ def admin_required
+   if !current_user.admin?
+     redirect_to "/"
+     flash[:warning] = "you have no permission"
    end
  end
 
