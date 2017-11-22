@@ -9,4 +9,8 @@ class CartsController < ApplicationController
     flash[:notice] = "购物车已经清空"
   end
 
+  def checkout
+    @order = Order.new
+  end
+
 end
