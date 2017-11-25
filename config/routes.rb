@@ -34,11 +34,14 @@ Rails.application.routes.draw do
 
   namespace :account do
     resources :orders
+    resources :likes
   end
 
   resources :products do
+    resources :comments
     member do
       post :add_to_cart
+      post :add_to_like
     end
   end
 end

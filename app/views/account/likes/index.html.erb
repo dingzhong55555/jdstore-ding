@@ -1,0 +1,11 @@
+<h2>收藏列表</h2>
+<hr>
+<ul>
+  <% if current_user.like_items.present? %>
+    <% current_user.like_items.each do |like_item| %>
+    <li><%=  link_to like_item.product.title, product_path(like_item.product_id) %></li>
+    <% end %>
+  <% else %>
+    <h2 class="text-center">暂时没有收藏的商品哦</h2>
+  <% end %>
+</ul>

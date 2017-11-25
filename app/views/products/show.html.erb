@@ -21,6 +21,40 @@
       <% else %>
         <p>商品已经销售一空</p>
       <% end %>
+      <%= link_to "收藏", add_to_like_product_path(@product), :method => :post, :class => "btn btn-primary btn-lg" %>
     </div>
   </div>
+</div>
+
+<div class="comment-form">
+  <%= simple_form_for [@product, @product.comments.new] do |f| %>
+    <div class="group">
+      <%= f.input :content %>
+    </div>
+
+    <div class="group">
+      <%= f.submit "发表评论", :class => "btn btn-danger" %>
+    </div>
+  <% end %>
+</div>
+<hr>
+<div class="comment-lists">
+  <p>评论数(<%= @product.comments.count %>)</p>
+
+  <% @comments.each do |comment| %>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <%= comment.user.email %>
+        <span class="pull-right">
+          <%= comment.created_at %>
+        </span>
+      </div>
+      <div class="panel-body">
+        <p><%= comment.content %></p>
+        <% if comment.user == current_user %>
+          <%= link_to "Delete", product_comment_path(@product, comment), :method => :delete, :class => "btn btn-danger pull-right"  %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 </div>

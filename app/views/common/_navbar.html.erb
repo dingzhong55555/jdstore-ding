@@ -40,6 +40,9 @@
                         <li>
                           <%= link_to "订单列表", account_orders_path %>
                         </li>
+                        <li>
+                          <%= link_to "收藏列表(#{current_user.liked_products.count})", account_likes_path %>
+                        </li>
                     </ul>
                   </li>
                 <% end %>
