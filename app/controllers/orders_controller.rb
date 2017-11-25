@@ -15,6 +15,9 @@ class OrdersController < ApplicationController
         product_list.quantity = cart_item.quantity
         product_list.save
       end
+
+      current_cart.clean!
+      OrderMailer.notify_order_placed(@order).deliver!
       redirect_to order_path(@order.token)
     else
       redirect_to :back
@@ -31,7 +34,6 @@ class OrdersController < ApplicationController
     @order.set_payment_with!("alipay")
     @order.pay!
 
-    current_cart.clean!
     redirect_to order_path(@order.token)
     flash[:notice] = "支付宝付款成功"
   end
@@ -41,7 +43,6 @@ class OrdersController < ApplicationController
     @order.set_payment_with!("wechat")
     @order.pay!
 
-    current_cart.clean!
     redirect_to order_path(@order.token)
     flash[:notice] = "微信支付成功！"
   end
