@@ -7,6 +7,13 @@ class ApplicationController < ActionController::Base
     @current_cart ||= find_cart
   end
 
+  def admin_required
+    if !current_user.admin?
+      redirect_to "/"
+      flash[:warning] = "you have no permission"
+    end
+  end
+
   private
 
   def find_cart

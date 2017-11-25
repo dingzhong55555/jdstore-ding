@@ -1,0 +1,23 @@
+<h2>订单详情(<%= render_order_state(@order) %>)</h2>
+<%= render "admin/orders/state_option", order: @order %>
+<table class = "table table-bordered">
+  <thead>
+    <tr>
+      <th>商品</th>
+      <th>价格</th>
+      <th>数量</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @product_lists.each do |product_list| %>
+      <tr>
+        <td><%= product_list.product_name %></td>
+        <td><%= product_list.product_price %></td>
+        <td><%= product_list.quantity %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<h3 class="pull-right">
+  总价： <%= @order.total %>元
+</h3>
