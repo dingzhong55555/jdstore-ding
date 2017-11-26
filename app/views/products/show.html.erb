@@ -52,7 +52,7 @@
       <div class="panel-body">
         <p><%= comment.content %></p>
         <% if comment.user == current_user %>
-          <%= link_to "Delete", product_comment_path(@product, comment), :method => :delete, :class => "btn btn-danger pull-right"  %>
+          <%= link_to "Delete", product_comment_path(@product, comment), :method => :delete, :data => {confirm: "are you sure?"}, :class => "btn btn-danger pull-right"  %>
         <% end %>
       </div>
     </div>
